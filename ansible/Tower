@@ -1,4 +1,4 @@
-1  git clone http://github.com/lerndevops/labs
+    1  git clone http://github.com/lerndevops/labs
     2  cd labs/ansible/install/
     3  ./installAnsible.sh 
     5  apt-get install software-properties-common
