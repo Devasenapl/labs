@@ -1,0 +1,312 @@
+11  docker -v
+   12  service docker status
+   13  cd /var/lib/docker/
+   14  ls -l
+   15  clear
+   16  cd
+   17  dockeer version
+   18  docker version
+   19  clear
+   20  docker image ls
+   21  docker pull tomcat
+   22  docker image ls
+   23  docker pull tomcat:8.5.55
+   24  docker pull tomcat:jdk11-corretto
+   25  clear
+   26  docker image ls
+   27  docker pull nginx
+   28  docker pull httpd
+   29  docker pull redis
+   30  clear
+   31  docker image ls
+   32  docker pull jenkins
+   33  docker pull jenkins:2.60.3
+   34  clear
+   35  docker image ls
+   36  docker image inspect tomcat:latest
+   37  clear
+   38  docker image ls
+   39  docker image rm jenkins:2.60.3
+   40  clear
+   41  history
+   42  clear
+   43  docker run -it tomcat:latest bash
+   44  clear
+   45  docker ps
+   46  docker run -d tomcat:latest
+   47  docker ps
+   48  docker run -d tomcat:latest
+   49  docker ps
+   50  docker run -d --name naresh tomcat:latest
+   51  docker ps
+   52  docker run -d nginx
+   53  docker run -d httpd
+   54  docker ps
+   55  clear
+   56  docker ps
+   57  docker inspect 2dd0474b89e7
+   58  curl 172.17.0.9:80
+   59  clear
+   60  history
+   61  clear
+   62  docker ps
+   63  docker logs 7ba8d92628ee
+   64  docker ps
+   65  clear
+   66  history
+   67  clear
+   68  docker stats
+   69  docker ps
+   70  docker exec -it 6803431ad62b bash
+   71  java -version
+   72  docker exec 6803431ad62b java -version
+   73  docker exec 6803431ad62b touch /tmp/naresh.txt
+   74  ls /tmp
+   75  docker exec 6803431ad62b ls -l /tmp/naresh.txt
+   76  clear
+   77  docker ps
+   78  docker stop a24630632d56 7ba8d92628ee 1f1676ac6656
+   79  docker ps
+   80  docker ps -a
+   81  docker start a24630632d56 7ba8d92628ee 1f1676ac6656
+   82  docker ps -a
+   83  docker kill 2dd0474b89e7 6803431ad62b
+   84  docker ps -a
+   85  docker start 2dd0474b89e7 6803431ad62b
+   86  docker ps
+   87  docker restart 123ed44f1b8c
+   88  docker ps
+   89  docker rm 6468ddad7fee
+   90  docker rm --force 6468ddad7fee
+   91  docker ps -a
+   92  history
+   93  clear
+   94  history
+   95  clear
+   96  docker ps
+   97  docker rename angry_robinson shoeb
+   98  docker ps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  113  docker run -d nginx
+  114  docker ps
+  115  docker inspect a49b52020a2c
+  116  curl 172.17.0.2:80
+  117  clear
+  118  docker run -d -P nginx
+  119  docker ps
+  120  netstat -anp | grep 49153
+  121  docker run -d -p 9080:80 nginx
+  122  docker ps
+  123  docker run -d -p 80:80 nginx
+  124  docker ps
+  125  docker run -d -p 80:80 nginx
+  126  clear
+  127  docker ps -a
+  128  docker rm -f `docker ps -qa`
+  129  clear
+  130  docker ps
+=========================================
+
+  131  docker pull tomcat
+  132  docker run -d tomcat
+  133  docker ps
+  134  docker exec -it e229cfe01689 bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1  ls -l
+2  cd webapps
+3  ls -l
+4  mkdir myapp
+5  cd myapp/
+6  ls -l
+7  touch index.html
+8  ls -l
+9  vi index.html
+10  apt-get update
+11  apt-get install vim -y
+12  vi index.html
+13  history
+14  cd ..
+15  ls -l
+16  wget https://github.com/lerndevops/labs/raw/master/docker/images/code/sampleapp.war
+17  ls -l
+
+come out of container using ctrl pq
+
+  135  docker ps
+  136  clear
+  137  docker image ls
+  138  docker ps
+  139  docker commit -m "deploy apps" e229cfe01689 myapp:v1
+  140  docker image ls
+  141  docker run -d -P myapp:v1
+145  vi myappdfile
+  146  ls -l
+  147  pwd
+  152  docker build --file myappdfile --tag myapp:v2-auto .
+  153  docker image ls
+  154  docker run -d -P myapp:v2-auto
+  155  docker ps
+
+
+
+
+  160  docker pull ubuntu:18.04
+  161  docker image ls
+  162  wget https://github.com/lerndevops/labs/raw/master/docker/images/code/tomcat-8.5.37.tar.gz
+  163  ls -l
+  164  wget https://github.com/lerndevops/labs/raw/master/docker/images/code/myapp.war
+  165  ls -l
+  166  vi dockerfile
+  167  tar -xzf tomcat-8.5.37.tar.gz
+  168  ls -l
+  169  vi dockerfile
+  170  clear
+  171  docker image ls
+  172  docker run -d -P tomcat
+  173  docker ps
+  174  cat dockerfile
+  175  docker image inspect tomcat
+  176  vi dockerfile
+  177  clear
+  178  docker build --file dockerfile --tag myapp:v3 .
+  179  docker image inspect myapp:v3
+  180  cat dockerfile
+  181  docker run -d -P myapp:v3
+  182  docker ps
+  183  vi dockerfile
+  184  docker build --file dockerfile --tag myapp:v4 .
+  185  docker image ls
+  186  docker image inspect myapp:v4
+  187  clear
+  188  docker run -d -P myapp:v4
+  189  docker ps
+  190  cat dockerfile
+194  docker image ls
+  195  docker tag myapp:v4 lerndevosp/myapp:v4
+  196  docker tag myapp:v4 lerndevops/myapp:v4
+  197  docker image ls
+  198  docker tag myapp:v2-auto lerndevops/myapp:v2-auto
+  199  docker build --file dockerfile --tag lerndevops/myapp:v5 .
+  200  docker image ls
+  201  docker push lerndevops/myapp:v5
+  202  docker login
+  203  docker push lerndevops/myapp:v5
+  204  docker push lerndevops/myapp:v4
+  205  docker push lerndevops/myapp:v2-auto
+  206  clear
+  207  cd /var/lib/docker/overlay2/
+  208  ls -l
+  209  cd
+  210  clear
+  211  docker image ls
+  212  docker save -o myimages.tgz myapp:v4 lerndevops/myapp:v5 nginx:latest
+  213  ls -l
+  214  hostname -i
+  215  scp myimages.tgz devops@172.31.27.246:/tmp
+  216  cd /tmp
+  217  ls -l
+  218  docker image
+  219  docker image ls
+  220  docker rm -f `docker ps -qa`
+  221  docker image prune -a
+  222  clear
+  223  docker image ls
+  224  ls -l
+  225  docker load --help
+  226  docker load -i myimages.tgz
+  227  docker image ls
+    358  clear
+  359  docker -v
+  360  docker info
+  361  clear
+  362  docker swarm init
+  363  docker node ls
+  364  docker node inspect node1
+  365  clear
+  366  docker node ls
+  367  docker service create --name svc1 --replicas 5 -p 9080:80 nginx
+  368  docker service create --name svc2 --replicas 5 -p 9081:3000 lerndevops/samplepyapp:v1
+  369  clear
+  370  docker service ls
+  371  docker service ps svc1
+  372  docker service ps svc2
+  373  docker service inspect svc1
+  374  clear
+  375  docker service ls
+  376  docker service scale svc1=10
+  377  docker service ls
+  378  docker service ps svc1
+  379  docker service scale svc1=4
+  380  docker service ps svc1
+  381  clear
+  382  docker service ls
+  383  docker service ps svc1
+  384  docker service ls
+  385  docker service ps svc1
+  386  docker service rm svc1
+  387  docker service ls
+  388  history
+  389  clear
+  390  docker service ls
+  391  docker ps
+  392  netstat -anp |grep 9081
+  393  history
+  394  clear
+  395  docker service ls
+  396  docker service rm svc2
+  397  vi docker-compose.yml
+  398  docker stack deploy -c docker-compose.yml stack1
+  399  docker stack ls
+  400  docker service ls
+  401  vi docker-compose.yml
+  402  docker stack rm stack1
+  403  docker stack deploy -c docker-compose.yml stack1
+  404  docker service ls
+  405  docker stack --help
+  406  docker stack services --help
+  407  docker service ls
+  408  docker service scale stack1_svc1=6
+  409  docker service update stack1_svc1 --replicas 2
+  410  cat docker-compose.yml
+  411  clear
+  412  vi myapp.yml
+  413  docker stack deploy -c myapp.yml myapp
+  414  docker service ls
+  415  docker service ps myapp_mongo
+  416  docker service logs --follow myapp_springbootapp
+  417  clear
+  418  docker service ls
+  419  docker service scale myapp_mongo=0
+  420  docker service ls
+  421  docker service scale myapp_mongo=1
+  422  docker service ps myapp_mongo
+  423  docker service scale myapp_mongo=0
+  424  docker service scale myapp_mongo=1
+  425  docker service ps myapp_mongo
+  426  clear
+  427  docker network ls
+  428  docker stack ls
+  429  docker stack rm myapp stack1
+  430  clear
+  431  docker network sl
+  432  docker network ls
+  433  docker network create --driver overlay myoverlay
+  434  docker network ls
+  435  docker service create --name testsvc --replicas 3 lerndevops/alpine:sleep
+  436  docker service ls
+  437  docker service ps testsvc
+  438  docker ps
+  439  docker exec 222c9c36d59a hostname -i
+  440  docker service rm testsvc
+  441  docker service create --name testsvc --replicas 3 --network myoverlay lerndevops/alpine:sleep
+  442  docker service ps testsvc
+  443  docker ps
+  444  clear
+  445  docker ps
+  446  docker exec 23dba103160e hostname -i
+  447  history
+  448  cat docker
+  449  cat docker-compose.yml
+  450  cat myapp.yml
+  451  cat docker-compose.yml
+
